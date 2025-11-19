@@ -1,0 +1,136 @@
+/* NAVBAR BASE */
+.navbar {
+  background-color: #40916c;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* LOGO */
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* NAV LINKS */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: #ffffff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #1b4332;
+}
+
+/* AUTH BUTTONS */
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+/* HAMBURGER (hidden desktop) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: white;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+/* Hamburger animation */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ---------------------- */
+/* MOBILE VIEW */
+/* ---------------------- */
+@media (max-width: 768px) {
+
+  /* Show hamburger on mobile */
+  .hamburger {
+    display: flex;
+  }
+
+  /* Stack nav-links vertically and center */
+  .nav-links,
+  .auth-buttons {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    background-color: #40916c;
+    margin: 0;
+    padding: 0.5rem 0;
+  }
+
+  /* Show active menu */
+  .nav-links.active,
+  .auth-buttons.active {
+    display: flex;
+  }
+
+  /* Nav links spacing */
+  .nav-links li {
+    margin: 0.5rem 0;
+  }
+
+  .nav-links a {
+    padding: 0.5rem 0;
+    font-size: 1.2rem;
+    display: block;
+  }
+
+  /* Auth buttons stack vertically */
+  .auth-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+
+  .auth-buttons a {
+    display: block;
+  }
+
+  /* Optional: add a little separation between links and buttons */
+  .nav-links.active + .auth-buttons.active {
+    margin-top: 0.5rem;
+  }
+}

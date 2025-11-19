@@ -1,0 +1,33 @@
+.btn {
+    padding: 0.8rem 1.8rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .btn-dark {
+    background-color: #1b4332;
+    color: #fff;
+  }
+  
+  .btn-dark:hover {
+    background-color: #21543f;
+    border: 1px solid #1b4332;
+  }
+  
+  .btn-light {
+    background-color: #fff;
+    color: #2c3e50;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .btn-light:hover {
+    background-color: #f8f8f8;
+    border-color: #ccc;
+  }
+  

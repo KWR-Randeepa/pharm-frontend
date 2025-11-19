@@ -1,0 +1,116 @@
+/* 🌿 Global Styles */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f0fdf4;
+  margin: 0;
+  padding: 0;
+  color: #064e3b;
+  /* Ensure body takes full width */
+  width: 100%;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px; /* Slightly reduced max-width for better focus */
+  margin: 0 auto; /* This centers the container horizontally */
+  padding: 40px 20px;
+  
+  /* FORCE CENTER ALIGNMENT */
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+/* 🌿 Title */
+h1 {
+  text-align: center;
+  color: #065f46;
+  margin-bottom: 30px;
+  font-size: 32px;
+  width: 100%;
+}
+
+/* 🌿 Search Box */
+.search-box {
+  width: 100%; /* Fill container width */
+  max-width: 800px; /* Prevent it from getting too wide on huge screens */
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.search-box input {
+  flex: 1; /* Takes available space */
+  padding: 14px;
+  border: 2px solid #10b981;
+  border-radius: 12px;
+  font-size: 16px;
+  background: white; /* Force white background */
+  color: #333;
+}
+
+.search-box button {
+  width: 150px;
+  background: #10b981;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.search-box button:hover {
+  background: #059669;
+}
+
+/* 🌿 Map */
+.leaflet-container {
+  width: 100% !important; /* Force map to fill container */
+  height: 450px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
+  z-index: 1; /* Ensure it stays below headers if any */
+}
+
+/* 🌿 Pharmacy Cards List Container */
+/* Add a wrapper div in your JSX for the list if you haven't, 
+   but this targets the divs directly if they are loose */
+div[style="margin-top: 20px;"] {
+    width: 100%;
+}
+
+.pharmacy-card {
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding doesn't break width */
+  background: #d8f3dc;
+  padding: 18px 22px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border-left: 6px solid #10b981;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.pharmacy-card h3 {
+  margin: 0;
+  color: #065f46;
+}
+
+/* 🌿 Responsive Design */
+@media (max-width: 768px) {
+  .leaflet-container {
+    height: 350px;
+  }
+  
+  .search-box {
+    flex-direction: column;
+  }
+  
+  .search-box button {
+    width: 100%;
+  }
+}
