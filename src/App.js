@@ -10,13 +10,18 @@ import Home from './pages/Home';
 import AdminAddMedicinePage from './pages/admin/addMedicine';
 import AdminPannel from './pages/admin/adminPannel';
 import Registration from './components/Pharmacy_reg/Registration';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function App() {
   return (
+    <div>
     <Router>
       <AppContent />
     </Router>
+    <ToastContainer position="top-right" autoClose={3000} />
+    </div>
   );
 }
 

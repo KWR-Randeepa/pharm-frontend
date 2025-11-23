@@ -50,7 +50,7 @@ function AddMedicineForm() {
   width: 100% !important;
   min-height: 100vh;
 
-  display: flex;             /* you forgot this */
+  display: flex;            
   flex-direction: column;
   justify-content: center;
   align-items: center;

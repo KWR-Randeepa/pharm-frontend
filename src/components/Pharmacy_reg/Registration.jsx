@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Camera, MapPin, User, Mail, Phone, Clock, Home, Loader2 } from 'lucide-react';
 import './Registration.css'; // This imports the CSS file
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
 export default function Registration() {
   const [loading, setLoading] = useState(false);
@@ -55,7 +57,7 @@ export default function Registration() {
     );
   };
 
-  const handleSubmit = (e) => {
+  /*const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     
@@ -71,8 +73,49 @@ export default function Registration() {
     setTimeout(() => {
       setLoading(false);
       alert("Pharmacy registered successfully! (Check console for data)");
+      toast.success('Pharmacy registered successfully!');
     }, 1500);
-  };
+  };*/
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!formData.latitude || !formData.longitude) {
+    toast.error("Please get your current location first!");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    // 1. Create a standard JavaScript object (JSON payload)
+    const payload = {
+      pharmacyName: formData.pharmacyName,
+      ownerName: formData.ownerName,
+      email: formData.email,
+      phoneNumber: formData.phoneNumber,
+      address: formData.address,
+      openingHours: formData.openingHours,
+      latitude: formData.latitude,
+      longitude: formData.longitude,
+      // Note: Standard JSON cannot send binary file objects (profilePicture) directly.
+      // If you need to send the image, the backend MUST support multipart/form-data.
+    };
+
+    // 2. Send as JSON (Axios handles the headers automatically)
+    const res = await axios.post(
+      "http://localhost:5000/api/pharmacy/register",
+      payload
+    );
+
+    toast.success(res.data.message);
+
+  } catch (error) {
+    console.log(error);
+    toast.error(error.response?.data?.message || "Registration failed");
+  }
+
+  setLoading(false);
+};
 
   return (
     <div className="app-container">
