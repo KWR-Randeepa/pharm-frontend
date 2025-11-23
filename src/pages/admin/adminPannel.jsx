@@ -1,4 +1,6 @@
+
 import React from "react";
+
 import { Toaster } from "react-hot-toast";
 import {
   Routes,
@@ -49,7 +51,7 @@ const styles = `
   /* Sidebar */
   .sidebar {
     width: 260px;
-    background-color: #1b4332; /* Dark Blue-Grey */
+    background-color: #2c3e50; /* Dark Blue-Grey */
     color: #ecf0f1;
     display: flex;
     flex-direction: column;
@@ -66,7 +68,7 @@ const styles = `
     font-size: 1.25rem;
     font-weight: bold;
     letter-spacing: 1px;
-    color: #d8f3dc; /* Accent Color */
+    color: #3498db; /* Accent Color */
   }
 
   .sidebar-menu {
@@ -87,7 +89,6 @@ const styles = `
     text-decoration: none;
     transition: all 0.2s;
     font-size: 0.95rem;
-    font-weight:bold;
   }
 
   .menu-link:hover {
@@ -96,7 +97,7 @@ const styles = `
   }
 
   .menu-link.active {
-    background-color: #74c69d;
+    background-color: #3498db;
     color: white;
     border-left: 4px solid #ecf0f1;
   }
@@ -160,8 +161,8 @@ const styles = `
     width: 50px;
     height: 50px;
     border-radius: 10px;
-    background-color: #d8f3dc;
-    color: #40916c;
+    background-color: #ebf5fb;
+    color: #3498db;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -251,7 +252,7 @@ export default function AdminPanel() {
   return (
     <div className="admin-container">
       <style>{styles}</style>
-      <Toaster position="top-right" />
+
       <Sidebar />
       <main className="main-content">
 

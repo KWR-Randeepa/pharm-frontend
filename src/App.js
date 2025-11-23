@@ -9,6 +9,7 @@ import PrivacyPolicy from './components/TermsOfUse/PrivacyPolicy';
 import Home from './pages/Home';
 import AdminAddMedicinePage from './pages/admin/addMedicine';
 import AdminPannel from './pages/admin/adminPannel';
+import Registration from './components/Pharmacy_reg/Registration';
 import './App.css';
 
 function App() {
@@ -36,6 +37,7 @@ function AppContent() {
         <Route path="/home" element={<Home />} />
         <Route path="/admin/add-medicine" element={<AdminAddMedicinePage />} />
         <Route path="/admin/pannel/*" element={<AdminPannel />} />
+        <Route path="/pharmacy-registration" element={<Registration />} />
       </Routes>
     </div>
   );

@@ -45,18 +45,21 @@ function AddMedicineForm() {
   return (
     <div className="page-container">
       <style>{`
-        /* Premium Gradient Background */
+      
         .page-container {
-          width: 100%;
-          min-height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 40px;
-          font-family: 'Inter', sans-serif;
-          background: linear-gradient(135deg, #77f3bdff 0%, #f0f4e8ff 100%);
-          box-sizing: border-box;
-        }
+  width: 100% !important;
+  min-height: 100vh;
+
+  display: flex;             /* you forgot this */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #77f3bdff 0%, #f0f4e8ff 100%);
+  box-sizing: border-box;
+  padding: 20px 0;
+}
 
         /* Glassmorphism Card */
         .form-card {
@@ -270,7 +273,7 @@ function AddMedicineForm() {
 export default function AdminAddMedicinePage() {
   return (
     <>
-      <Toaster position="top-center" />
+      
       <AddMedicineForm />
     </>
   );
