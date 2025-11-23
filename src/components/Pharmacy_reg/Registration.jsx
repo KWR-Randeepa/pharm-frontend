@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Camera, MapPin, User, Mail, Phone, Clock, Home, Loader2 } from 'lucide-react';
 import './Registration.css'; // This imports the CSS file
-import toast from 'react-hot-toast';
+import toast ,{Toaster} from 'react-hot-toast';
 import axios from 'axios';
 
 export default function Registration() {
+     
   const [loading, setLoading] = useState(false);
   const [locating, setLocating] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -119,7 +120,7 @@ export default function Registration() {
 
   return (
     <div className="app-container">
-      
+      <Toaster position="top-right" reverseOrder={false} />
       {/* Left Side - Visual/Branding */}
       <div className="sidebar">
         <div className="sidebar-top-bar"></div>

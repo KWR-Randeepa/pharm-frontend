@@ -16,12 +16,12 @@ import './App.css';
 
 function App() {
   return (
-    <div>
+    
     <Router>
       <AppContent />
     </Router>
-    <ToastContainer position="top-right" autoClose={3000} />
-    </div>
+   
+    
   );
 }
 
