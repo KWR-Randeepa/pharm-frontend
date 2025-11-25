@@ -3,7 +3,12 @@ import { Camera, MapPin, User, Mail, Phone, Clock, Home, Loader2 } from 'lucide-
 import './Registration.css'; // This imports the CSS file
 import toast ,{Toaster} from 'react-hot-toast';
 import axios from 'axios';
+import { createClient } from '@supabase/supabase-js';
 
+const supabaseUrl = 'https://ebjvkdjjzbblvscxnffz.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVianZrZGpqemJibHZzY3huZmZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwMzA5NzYsImV4cCI6MjA3OTYwNjk3Nn0.KWmEO6_XZ42IM23_A4wirMkz8-Qux-iPDQGgUmotFws';
+
+export const supabase = createClient(supabaseUrl, supabaseKey);
 export default function Registration() {
      
   const [loading, setLoading] = useState(false);
@@ -87,7 +92,32 @@ export default function Registration() {
 
   setLoading(true);
 
+  
+
   try {
+    let imageUrl = "";
+    if(formData.profilePicture){
+      const file = formData.profilePicture;
+      const fileName = `${Date.now()}_${file.name}`;
+
+      const{data,error} = await supabase.storage
+        .from('pharmacy-img')
+        .upload(fileName, file);
+
+        if(error){
+          console.log(error);
+          toast.error("Image upload failed");
+          setLoading(false);
+          return;
+        }
+        
+        const {data :urlData} = supabase.storage
+          .from('pharmacy-img')
+          .getPublicUrl(fileName);
+
+          imageUrl = urlData.publicUrl;
+    }
+
     // 1. Create a standard JavaScript object (JSON payload)
     const payload = {
       pharmacyName: formData.pharmacyName,
@@ -98,6 +128,7 @@ export default function Registration() {
       openingHours: formData.openingHours,
       latitude: formData.latitude,
       longitude: formData.longitude,
+      profilePicture: imageUrl || null,
       // Note: Standard JSON cannot send binary file objects (profilePicture) directly.
       // If you need to send the image, the backend MUST support multipart/form-data.
     };
