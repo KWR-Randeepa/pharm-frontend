@@ -34,9 +34,9 @@ const Navbar = () => {
         {/* AUTH BUTTONS */}
         <div className={`auth-buttons ${menuOpen ? 'active' : ''}`}>
           <Link to="/login">
-            <Button type="light" text="Sign In" />
+            <Button type="light" text="Log In" />
           </Link>
-          <Link to="/signup">
+          <Link to="/pharmacy-registration">
             <Button type="dark" text="Sign Up" />
           </Link>
         </div>

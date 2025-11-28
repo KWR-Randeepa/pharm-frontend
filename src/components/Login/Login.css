@@ -1,137 +1,238 @@
-/* ---- Page Layout ---- */
+:root {
+  --emerald-50: #ecfdf5;
+  --emerald-100: #d1fae5;
+  --emerald-200: #a7f3d0;
+  --emerald-300: #6ee7b7;
+  --emerald-400: #34d399;
+  --emerald-500: #10b981;
+  --emerald-600: #059669;
+  --emerald-700: #047857;
+  --emerald-800: #065f46;
+  --emerald-900: #064e3b;
+  --emerald-950: #022c22;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Main Container - Full Screen Centered */
 .login-container {
-    width: 100%;
-    height: 100vh;
-    background: #f3f6fa;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--emerald-50);
+  background-image: radial-gradient(at 0% 0%, var(--emerald-100) 0px, transparent 50%),
+                    radial-gradient(at 100% 100%, var(--emerald-200) 0px, transparent 50%);
+  padding: 20px;
 }
 
-/* ---- Login Box ---- */
-form {
-    background: #ffffff;
-    width: 350px;
-    padding: 30px 35px;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+/* Card Styling */
+.login-container form {
+  background: white;
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--emerald-100);
+  transition: transform 0.2s ease;
 }
 
-form h1 {
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 28px;
-    color: #333;
+.login-container h1 {
+  color: var(--emerald-950);
+  margin-bottom: 8px;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
 }
 
-/* ---- Input Fields ---- */
+.login-container p {
+  text-align: center;
+  color: var(--emerald-700);
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+/* Input Fields */
 .input-group {
-    margin-bottom: 18px;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .input-field {
-    width: 100%;
-    height: 45px;
-    padding: 10px 14px;
-    border-radius: 8px;
-    border: 1px solid #ccd1d9;
-    font-size: 15px;
-    transition: 0.2s ease;
-    background: #fafafa;
-    box-sizing: border-box; /* Add this */
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--emerald-200);
+  border-radius: 8px;
+  font-size: 16px;
+  color: var(--emerald-900);
+  background-color: var(--emerald-50);
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.input-field::placeholder {
+  color: var(--emerald-400);
 }
 
 .input-field:focus {
-    border-color: #4a90e2;
-    background: #fff;
-    outline: none;
+  background-color: white;
+  border-color: var(--emerald-500);
+  box-shadow: 0 0 0 4px var(--emerald-100);
 }
 
-/* ---- Password Toggle ---- */
+/* Password Toggle Wrapper */
 .password-wrapper {
-    position: relative;
-}
-
-/* Add specific padding for password input to accommodate the toggle button */
-.password-wrapper .input-field {
-    padding-right: 60px; /* Add this - enough space for the SHOW/HIDE button */
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .toggle-password {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    font-size: 13px;
-    color: #4f5154;
-    cursor: pointer;
-    font-weight: 600;
-    z-index: 2; /* Add this to ensure button stays above input */
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--emerald-600);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
 }
 
-/* ---- Options Row ---- */
+.toggle-password:hover {
+  background-color: var(--emerald-100);
+  color: var(--emerald-800);
+}
+
+/* Options Row (Forgot Password & Remember Me) */
 .options-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  font-size: 14px;
 }
 
 .options-row a {
-    color: #4a90e2;
-    text-decoration: none;
+  color: var(--emerald-600);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
 }
 
 .options-row a:hover {
-    text-decoration: underline;
+  color: var(--emerald-800);
+  text-decoration: underline;
 }
 
 .remember-me {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--emerald-800);
+  cursor: pointer;
 }
 
-/* ---- Login Button ---- */
+.remember-me input[type="checkbox"] {
+  accent-color: var(--emerald-600);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Login Button */
 .login-button {
-    width: 100%;
-    height: 45px;
-    background: #3b82f6;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    transition: background 0.2s ease;
+  width: 100%;
+  padding: 14px;
+  background-color: var(--emerald-600);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
 }
 
-.login-button:hover {
-    background: #2563eb;
+.login-button:hover:not(:disabled) {
+  background-color: var(--emerald-700);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
-.login-button:active {
-    transform: scale(0.98);
+.login-button:active:not(:disabled) {
+  transform: translateY(0);
 }
 
+.login-button:disabled {
+  background-color: var(--emerald-300);
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* Footer Link */
 .login-link {
-    text-align: center;
-    font-size: 14px;
-    color: #6b7280;
+  margin-top: 24px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--emerald-800);
 }
 
 .login-link a {
-    color: #3b82f6;
-    text-decoration: none;
-    font-weight: bold;
+  color: var(--emerald-600);
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .login-link a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
+}
+
+/* Error Message */
+.error-msg {
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+  color: #dc2626;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+  animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-container form {
+    padding: 30px 20px;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+  
+  .login-container {
+    background: white;
+  }
 }
