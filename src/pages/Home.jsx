@@ -29,12 +29,45 @@ function Home() {
   const drugName = searchParams.get('drug'); 
 
   // 2. Set User Location
-  useEffect(() => {
+ /* useEffect(() => {
    setLocation({
       lat: 6.9275,
       long: 79.8590
     });
-  }, []);
+  }, []);*/
+  useEffect(() => {
+  // 1. Check if Geolocation is supported by the browser
+  if ("geolocation" in navigator) {
+    
+    navigator.geolocation.getCurrentPosition(
+      // Success Callback
+      (position) => {
+        setLocation({
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+        });
+      },
+      // Error Callback (User denied permission or location unavailable)
+      (error) => {
+        console.error("Error getting location:", error);
+        // Fallback to Colombo if permission is denied
+        setLocation({
+          lat: 6.9275,
+          long: 79.8590
+        });
+        alert("Location permission denied. Defaulting to Colombo.");
+      }
+    );
+
+  } else {
+    // Browser doesn't support Geolocation
+    console.log("Geolocation is not available");
+    setLocation({
+      lat: 6.9275,
+      long: 79.8590
+    });
+  }
+}, []);
 
   // 3. Automatically Fetch Data
   useEffect(() => {

@@ -43,6 +43,7 @@ function AppContent() {
         <Route path="/admin/add-medicine" element={<AdminAddMedicinePage />} />
         <Route path="/admin/pannel/*" element={<AdminPannel />} />
         <Route path="/pharmacy-registration" element={<Registration />} />
+      
       </Routes>
     </div>
   );
