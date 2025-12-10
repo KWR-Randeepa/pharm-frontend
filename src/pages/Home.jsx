@@ -122,7 +122,7 @@ function Home() {
 
       {/* Map View */}
       {location && drugName && (
-        <MapContainer center={[location.lat, location.long]} zoom={13} scrollWheelZoom={true}>
+        <MapContainer center={[location.lat, location.long]} zoom={13} scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; OpenStreetMap contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

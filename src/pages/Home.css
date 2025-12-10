@@ -6,8 +6,8 @@ body {
   padding: 0;
   color: #064e3b;
   /* Ensure body takes full width */
-  width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .container {
@@ -15,7 +15,8 @@ body {
   max-width: 1000px; /* Slightly reduced max-width for better focus */
   margin: 0 auto; /* This centers the container horizontally */
   padding: 40px 20px;
-  
+  height: 100%;
+  overflow-y: auto;
   /* FORCE CENTER ALIGNMENT */
   display: flex;
   flex-direction: column;

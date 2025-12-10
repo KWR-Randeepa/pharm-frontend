@@ -1,0 +1,104 @@
+/* 1. Define the Palette Variables */
+:root {
+  --emerald-50: #ecfdf5;
+  --emerald-100: #d1fae5;
+  --emerald-200: #a7f3d0;
+  --emerald-300: #6ee7b7;
+  --emerald-400: #34d399;
+  --emerald-500: #10b981;
+  --emerald-600: #059669;
+  --emerald-700: #047857;
+  --emerald-800: #065f46;
+  --emerald-900: #064e3b;
+  --emerald-950: #022c22;
+}
+
+.container {
+  /* 2. Full Width Settings */
+  width: 100%;       /* Take full available width */
+  max-width: none;   /* Override any global limits */
+  margin: 0;         /* Remove auto margins */
+  padding: 0;        /* Remove default padding */
+  
+  /* Layout & Height */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* 3. New Gradient using Emerald Variables */
+  /* Gradient from Emerald 400 to Emerald 800 */
+  background: linear-gradient(135deg, var(--emerald-400) 0%, var(--emerald-800) 100%);
+}
+
+.card {
+  /* Background: Emerald 50 */
+  background-color: var(--emerald-50); 
+  padding: 3rem;
+  border-radius: 2rem;
+  max-width: 500px;
+  width: 90%; /* Responsive width for mobile */
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  z-index: 10;
+  margin: 1rem;
+}
+
+.heading {
+  font-size: 2.25rem;
+  font-weight: 800;
+  /* Text: Emerald 900 */
+  color: var(--emerald-900);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.subtext {
+  /* Text: Emerald 700 */
+  color: var(--emerald-700);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.button {
+  /* Button BG: Emerald 600 */
+  background-color: var(--emerald-600);
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 9999px; /* Pill shape */
+  font-weight: bold;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.button:hover {
+  /* Button Hover: Emerald 800 */
+  background-color: var(--emerald-800);
+  transform: scale(1.05);
+}
+
+/* Abstract Background Circles */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+}
+
+.blob-1 {
+  bottom: -50px;
+  right: 50px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.15);
+}

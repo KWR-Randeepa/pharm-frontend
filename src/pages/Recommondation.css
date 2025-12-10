@@ -1,0 +1,144 @@
+/* 1. Main Section Container - Emerald Background */
+.review-section {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ecfdf5; /* Light Emerald Background */
+  padding: 4rem 1rem;
+  width: 100%;
+}
+
+/* 2. Section Title */
+.section-title {
+  font-size: 2.5rem;
+  color: #064e3b; /* Dark Forest Green */
+  margin-bottom: 3rem;
+  text-align: center;
+  position: relative;
+}
+
+/* Optional underline for title */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: #10b981; /* Primary Emerald */
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* 3. The Card Box */
+.review-card {
+  background: #ffffff;
+  padding: 2.5rem 2rem;
+  border-radius: 1rem; /* Smooth rounded corners */
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15); /* Soft Green Shadow */
+  width: 100%;
+  max-width: 700px; /* Limits width on big screens */
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+  border-top: 5px solid #10b981; /* Emerald Accent Bar */
+}
+
+.review-card:hover {
+  box-shadow: 0 15px 30px rgba(16, 185, 129, 0.25);
+  transform: translateY(-5px); /* Slight lift effect */
+}
+
+/* 4. Image Styling */
+.review-image-container {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 1.5rem auto;
+}
+
+.review-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #10b981; /* Emerald Border */
+  padding: 3px; /* Space between border and image */
+  background: #fff;
+}
+
+/* 5. The Quote Icon */
+.quote-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3rem;
+  height: 3rem;
+  background: #10b981;
+  color: #fff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  transform: translate(-10%, 10%);
+  border: 2px solid #fff;
+}
+
+/* 6. Typography */
+.author-name {
+  color: #065f46; /* Medium-Dark Emerald */
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+}
+
+.author-role {
+  color: #34d399; /* Lighter Emerald */
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.stars {
+  color: #f59e0b; /* Golden Yellow for stars */
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.review-text {
+  color: #4b5563; /* Gray text for readability */
+  line-height: 1.8;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+/* 7. Navigation Buttons */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.nav-btn {
+  background: transparent;
+  border: 2px solid #a7f3d0; /* Very light green border */
+  color: #10b981;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-btn:hover {
+  background: #10b981;
+  color: #fff;
+  border-color: #10b981;
+}
