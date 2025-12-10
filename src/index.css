@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* index.css */
+
+/* 1. Ensure the root elements don't lock the height */
+html, body, #root, .App {
+  height: auto !important; /* Allow them to grow */
+  min-height: 100vh;       /* At least full screen */
+  overflow-y: visible !important; /* Ensure scrollbars can appear */
+  overflow-x: hidden;      /* Stop horizontal scrolling */
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. Remove fixed height from your specific container if it exists */

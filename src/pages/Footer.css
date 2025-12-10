@@ -1,0 +1,170 @@
+/* --- Color Variables (Matching your Stats theme) --- */
+:root {
+  --emerald-100: #d1fae5;
+  --emerald-400: #34d399;
+  --emerald-500: #10b981;
+  --emerald-800: #065f46;
+  --emerald-900: #064e3b;
+  --emerald-950: #022c22; /* Even darker for footer background */
+}
+
+/* --- Main Footer Section --- */
+.footer-section {
+  background-color: var(--emerald-900);
+  color: var(--emerald-100);
+  padding: 70px 20px 0 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  padding-bottom: 50px;
+}
+
+/* --- Columns --- */
+.footer-col {
+  flex: 1;
+  min-width: 250px; /* Ensures columns stack on mobile */
+}
+
+/* Brand Specifics */
+.brand-col {
+  flex: 1.5; /* Give the brand column slightly more space */
+}
+
+.footer-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.footer-text {
+  color: var(--emerald-100);
+  line-height: 1.6;
+  margin-bottom: 25px;
+  max-width: 350px;
+  opacity: 0.9;
+}
+
+/* --- Headings --- */
+.footer-title {
+  font-size: 1.2rem;
+  color: white;
+  margin-bottom: 20px;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+
+/* Green underline for headings */
+.footer-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 40px;
+  height: 3px;
+  background-color: var(--emerald-500);
+  border-radius: 2px;
+}
+
+/* --- Links --- */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: var(--emerald-100);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: white;
+  transform: translateX(5px); /* Slide effect */
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+/* --- Contact Info --- */
+.footer-contact {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-contact li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  color: var(--emerald-100);
+}
+
+.contact-icon {
+  color: var(--emerald-400);
+  margin-right: 12px;
+  margin-top: 5px; /* Aligns icon with first line of text */
+  font-size: 1.1rem;
+}
+
+/* --- Social Icons --- */
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: var(--emerald-500);
+  transform: translateY(-3px);
+}
+
+/* --- Footer Bottom --- */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  padding: 25px 0;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .brand-col {
+    max-width: 100%;
+  }
+
+  .footer-logo {
+    margin-top: 0;
+  }
+}

@@ -1,3 +1,70 @@
+/* =======================================================
+   =============== GLOBAL & SCROLL FIXES =================
+   ======================================================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrollbar */
+  overflow-y: auto;   /* ENABLE vertical scrolling */
+}
+
+/* =======================================================
+   =============== HERO CONTAINER =================
+   ======================================================= */
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  width: 100%;
+  
+  /* --- CHANGED: Full Screen Height --- */
+  min-height: 100vh; /* Ensures it covers the full screen at minimum */
+  height: auto;      /* Allows it to grow larger if content needs it */
+  
+  position: relative;
+  background-image: url('../../assets/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #ffffff;
+  /* Removed 'overflow: hidden' here so content doesn't get cut off */
+}
+
+/* Gradient overlay */
+.hero-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2));
+  background-size: 200% 200%; 
+  animation: gradientShift 10s ease infinite;
+  z-index: 1;
+}
+
+/* Ensure content appears above overlay */
+.hero-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Keyframes for gradient animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* =======================================================
+   =============== COMPONENT STYLES =================
+   ======================================================= */
+
 /* ===== SEARCH WRAPPER ===== */
 .search-wrapper {
   display: flex;
@@ -10,60 +77,6 @@
   margin-bottom: 2rem;
 }
 
-
-
-.hero-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-  width: 100%;
-  min-height: 400px;
-  position: relative;
-
-  background-image: url('../../assets/bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #ffffff;
-  overflow: hidden; /* ensures overlay stays inside */
-}
-
-/* Gradient overlay */
-.hero-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2));
-  background-size: 200% 200%; /* needed for animation */
-  animation: gradientShift 10s ease infinite;
-
-  z-index: 1;
-}
-
-/* Ensure content appears above overlay */
-.hero-container > * {
-  position: relative;
-  z-index: 2;
-}
-
-/* Keyframes for gradient animation */
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
-  100% {
-    background-position: 0% 0%;
-  }
-}
 /* ===== TITLE ===== */
 .hero-title {
   font-size: 3.5rem;
@@ -98,10 +111,11 @@
   padding: 0.5rem;
   color: #16b620;
   text-align: center;
+  background: transparent; /* Added to ensure it blends */
 }
 
 .search-input::placeholder {
-  color: #aaa;
+  color: #333; /* Darkened slightly for visibility on blur */
 }
 
 /* ===== SEARCH BUTTON ===== */
@@ -110,11 +124,10 @@
   border-radius: 50%;
   width: 50px;
   height: 50px;
-
+  display: flex; /* Added display flex to center icon */
   justify-content: center;
   align-items: center;
   cursor: pointer;
-
   transition: background-color 0.3s, transform 0.2s;
 }
 
@@ -135,23 +148,19 @@
   margin-top: 1rem;
 }
 
-
 /* =======================================================
    =============== RESPONSIVE BREAKPOINTS =================
    ======================================================= */
 
 /* ---------- Tablets (900px and below) ---------- */
 @media (max-width: 900px) {
-
   .hero-title {
     font-size: 2.8rem;
   }
-
   .search-bar {
     width: 80%;
     padding: 10px 18px;
   }
-
   .search-input {
     font-size: 1.1rem;
   }
@@ -159,9 +168,11 @@
 
 /* ---------- Large Phones (600px and below) ---------- */
 @media (max-width: 600px) {
-
   .hero-container {
     padding: 3rem 1rem;
+    /* On mobile, min-height handles the height, but if content is small, 
+       this ensures it still covers screen */
+    min-height: 100vh; 
   }
 
   .hero-title {
@@ -198,20 +209,16 @@
 
 /* ---------- Small Phones (400px and below) ---------- */
 @media (max-width: 400px) {
-
   .hero-title {
     font-size: 1.8rem;
   }
-
   .search-bar {
     padding: 8px 12px;
   }
-
   .search-button {
     width: 40px;
     height: 40px;
   }
-
   .search-icon {
     width: 16px;
     height: 16px;

@@ -11,10 +11,12 @@
   --emerald-900: #064e3b;
   --emerald-950: #022c22;
 }
+
 body, html {
   overflow: hidden;
   height: 100%;
 }
+
 .app-container {
   display: flex;
   min-height: 100vh;
@@ -141,14 +143,12 @@ body, html {
   }
 }
 
-
 .form-wrapper {
   max-height: calc(100vh - 4rem);
   max-width: 28rem;
   margin-left: auto;
   margin-right: auto;
   padding-right: 6px;
-  
 }
 
 .form-header {
@@ -186,11 +186,13 @@ body, html {
   flex-direction: column;
   gap: 1.5rem;
   background-color: var(--emerald-800);
+  /* Added padding/radius to the form container itself for a smoother look */
+  padding: 2rem; 
+  border-radius: 1.5rem; 
   padding-bottom: 30%;
 }
 
 /* --- Upload --- */
-
 .upload-container {
   display: flex;
   flex-direction: column;
@@ -268,7 +270,6 @@ body, html {
 }
 
 /* --- Inputs --- */
-
 .form-group {
   display: flex;
   flex-direction: column;
@@ -279,7 +280,7 @@ body, html {
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--emerald-200);
-  margin-left: 0.25rem;
+  margin-left: 0.5rem; /* Slight adjust for rounded inputs */
 }
 
 .label-row {
@@ -307,33 +308,42 @@ body, html {
 
 .input-icon-wrapper {
   position: absolute;
-  left: 0.75rem;
+  left: 1.25rem; /* Adjusted left position for larger padding */
   top: 50%;
   transform: translateY(-50%);
   color: var(--emerald-500);
   pointer-events: none;
 }
 
+/* --- UPDATED SECTION START --- */
 .form-input, .form-textarea {
   width: 100%;
   background-color: rgba(6, 95, 70, 0.5);
   border: 1px solid var(--emerald-700);
-  border-radius: 0.75rem;
-  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  
+  /* Changed to pill shape */
+  border-radius: 50px; 
+  
+  /* Increased padding for bigger box */
+  padding: 1rem 1.5rem 1rem 3.5rem; 
+  
   color: white;
   transition: all 0.2s;
   font-size: 1rem;
   box-sizing: border-box;
 }
+/* --- UPDATED SECTION END --- */
 
 .form-textarea {
-  padding-left: 1rem;
+  padding-left: 1.5rem; /* Adjust padding for textarea since it has no icon usually */
   resize: none;
   font-family: inherit;
+  border-radius: 1.5rem; /* Textareas look better with slightly less rounding than inputs */
 }
 
 .form-input::placeholder, .form-textarea::placeholder {
   color: var(--emerald-50);
+  opacity: 0.6;
 }
 
 .form-input:focus, .form-textarea:focus {
@@ -357,8 +367,9 @@ body, html {
 .location-btn {
   background-color: var(--emerald-600);
   color: white;
-  padding: 0 1rem;
-  border-radius: 0.75rem;
+  padding: 0 1.25rem;
+  /* Updated to match inputs */
+  border-radius: 50px; 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -375,7 +386,7 @@ body, html {
 .helper-text {
   font-size: 0.75rem;
   color: var(--emerald-500);
-  margin-left: 0.25rem;
+  margin-left: 0.75rem;
 }
 
 /* --- Submit --- */
@@ -385,7 +396,8 @@ body, html {
   color: white;
   font-weight: 700;
   padding: 1rem;
-  border-radius: 0.75rem;
+  /* Updated to match inputs */
+  border-radius: 50px;
   box-shadow: 0 10px 15px -3px rgba(6, 78, 59, 0.5);
   border: none;
   cursor: pointer;
@@ -400,7 +412,7 @@ body, html {
 .submit-btn:hover {
   background-color: var(--emerald-400);
   transform: scale(1.01);
-  }
+}
 
 .submit-btn:active {
   transform: scale(0.99);

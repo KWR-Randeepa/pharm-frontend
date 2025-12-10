@@ -9,6 +9,9 @@ import {
   useLocation
 } from "react-router-dom";
 import AdminAddMedicinePage from "./addMedicine";
+import AddMedicine from "./AddTestMed";
+import Products from "./Product";
+import Dashboard from "./dashbord";
 
 // --- INLINE SVG ICONS (Replaces react-icons) ---
 const Icons = {
@@ -29,6 +32,27 @@ const Icons = {
 // --- CSS STYLES ---
 const styles = `
   /* Reset & Base */
+  Here is the refined CSS for your Sidebar.
+
+I have updated it to use the Dark Emerald Theme (emerald-950), which creates a professional, high-contrast look against your light content area. I also added a :root section so you can use these variables globally if you wish.
+
+CSS
+
+/* Sidebar.css */
+
+:root {
+  --emerald-50: #ecfdf5;
+  --emerald-100: #d1fae5;
+  --emerald-200: #a7f3d0;
+  --emerald-300: #6ee7b7;
+  --emerald-400: #34d399;
+  --emerald-500: #10b981;
+  --emerald-600: #059669;
+  --emerald-700: #047857;
+  --emerald-800: #065f46;
+  --emerald-900: #064e3b;
+  --emerald-950: #022c22;
+}
   * {
     box-sizing: border-box;
     margin: 0;
@@ -50,63 +74,77 @@ const styles = `
 
   /* Sidebar */
   .sidebar {
-    width: 260px;
-    background-color: #2c3e50; /* Dark Blue-Grey */
-    color: #ecf0f1;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    transition: width 0.3s;
-  }
+  width: 260px;
+  /* Darkest Emerald for a premium deep background */
+  background-color: var(--emerald-950); 
+  color: var(--emerald-100);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: width 0.3s;
+  /* Optional: Add a subtle shadow to separate from content */
+  box-shadow: 4px 0 10px rgba(2, 44, 34, 0.1); 
+}
 
-  .sidebar-header {
-    height: 70px;
-    display: flex;
-    align-items: center;
-    padding: 0 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 1.25rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-    color: #3498db; /* Accent Color */
-  }
+.sidebar-header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  /* Dark separator line */
+  border-bottom: 1px solid var(--emerald-900); 
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  /* Bright Green for the Logo/Brand to pop */
+  color: var(--emerald-400); 
+}
 
-  .sidebar-menu {
-    flex: 1;
-    padding: 20px 0;
-    list-style: none;
-  }
+.sidebar-menu {
+  flex: 1;
+  padding: 20px 0;
+  list-style: none;
+}
 
-  .menu-item {
-    margin-bottom: 5px;
-  }
+.menu-item {
+  margin-bottom: 5px;
+}
 
-  .menu-link {
-    display: flex;
-    align-items: center;
-    padding: 12px 24px;
-    color: #bdc3c7;
-    text-decoration: none;
-    transition: all 0.2s;
-    font-size: 0.95rem;
-  }
+.menu-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  /* Softer green for inactive links */
+  color: var(--emerald-200); 
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.95rem;
+  border-left: 4px solid transparent; /* Placeholder for hover effect */
+}
 
-  .menu-link:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #fff;
-  }
+.menu-link:hover {
+  /* Slightly lighter background on hover */
+  background-color: var(--emerald-900); 
+  color: var(--emerald-50);
+  border-left-color: var(--emerald-600);
+}
 
-  .menu-link.active {
-    background-color: #3498db;
-    color: white;
-    border-left: 4px solid #ecf0f1;
-  }
+.menu-link.active {
+  /* Vibrant Green Background for the active item */
+  background: linear-gradient(90deg, var(--emerald-800) 0%, var(--emerald-900) 100%);
+  color: #ffffff;
+  /* Bright accent strip on the left */
+  border-left: 4px solid var(--emerald-400); 
+  font-weight: 600;
+}
 
-  .menu-icon {
-    margin-right: 12px;
-    display: flex;
-    align-items: center;
-  }
+.menu-icon {
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  /* Ensure icons inherit the color changes */
+  color: inherit; 
+}
 
   /* Main Content Area */
   .main-content {
@@ -185,33 +223,7 @@ const styles = `
 // --- COMPONENTS ---
 
 // 1. Dashboard Component (Placeholder)
-function Dashboard() {
-  return (
-    <div className="dashboard-grid">
-      <div className="stat-card">
-        <div className="stat-icon"><Icons.Package /></div>
-        <div className="stat-info">
-          <h3>Total Products</h3>
-          <p>124</p>
-        </div>
-      </div>
-      <div className="stat-card">
-        <div className="stat-icon"><Icons.List /></div>
-        <div className="stat-info">
-          <h3>Low Stock</h3>
-          <p>12</p>
-        </div>
-      </div>
-      <div className="stat-card">
-        <div className="stat-icon"><Icons.Grid /></div>
-        <div className="stat-info">
-          <h3>Categories</h3>
-          <p>8</p>
-        </div>
-      </div>
-    </div>
-  );
-}
+
 
 // 2. Sidebar Component
 function Sidebar() {
@@ -260,13 +272,9 @@ export default function AdminPanel() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="add-product" element={<AdminAddMedicinePage />} />
-            <Route path="products" element={
-              <div style={{ textAlign: 'center', color: '#888', marginTop: '50px' }}>
-                <h3>Product List View</h3>
-                <p>Displaying medicine inventory here...</p>
-              </div>
-            } />
+            <Route path="add-product" element={<AddMedicine />} />
+            <Route path="products" element={<Products />} />
+          
           </Routes>
         </div>
       </main>

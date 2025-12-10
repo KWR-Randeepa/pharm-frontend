@@ -1,0 +1,131 @@
+/* AddMedicine.css */
+
+/* 1. Scoped Variables & Container */
+.add-medicine-container {
+  /* Define the Emerald Palette locally */
+  --emerald-50: #ecfdf5;
+  --emerald-100: #d1fae5;
+  --emerald-200: #a7f3d0;
+  --emerald-300: #6ee7b7;
+  --emerald-400: #34d399;
+  --emerald-500: #10b981;
+  --emerald-600: #059669;
+  --emerald-700: #047857;
+  --emerald-800: #065f46;
+  --emerald-900: #064e3b;
+  --emerald-950: #022c22;
+
+  /* Layout & Background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--emerald-50); /* Lightest Green Background */
+  padding: 20px;
+}
+
+/* 2. Form Card */
+.add-medicine-container .form-card {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  /* subtle shadow using dark emerald */
+  box-shadow: 0 4px 15px rgba(2, 44, 34, 0.08); 
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid var(--emerald-100);
+}
+
+.add-medicine-container .form-card h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--emerald-900); /* Darkest Green for Heading */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 3. Form Groups */
+.add-medicine-container .form-group {
+  margin-bottom: 15px;
+}
+
+.add-medicine-container .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--emerald-800); /* Dark Green for Labels */
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.add-medicine-container .form-group input,
+.add-medicine-container .form-group textarea,
+.add-medicine-container .form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--emerald-200); /* Soft Green Border */
+  border-radius: 20px;
+  font-size: 1rem;
+  color: var(--emerald-950);
+  background-color: #fff;
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.add-medicine-container .form-group input::placeholder,
+.add-medicine-container .form-group textarea::placeholder {
+    color: var(--emerald-400);
+}
+
+.add-medicine-container .form-group input:focus,
+.add-medicine-container .form-group textarea:focus,
+.add-medicine-container .form-group select:focus {
+  border-color: var(--emerald-500); /* Vibrant Green on Focus */
+  box-shadow: 0 0 0 3px var(--emerald-100); /* Glow effect */
+  outline: none;
+}
+
+/* 4. Submit Button */
+.add-medicine-container .submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--emerald-600); /* Primary Button Color */
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.add-medicine-container .submit-btn:hover {
+  background-color: var(--emerald-700); /* Darker on Hover */
+}
+
+.add-medicine-container .submit-btn:active {
+  background-color: var(--emerald-800);
+  transform: scale(0.98);
+}
+
+/* 5. Messages */
+.add-medicine-container .message {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Success uses the Emerald Theme */
+.add-medicine-container .message.success {
+  background-color: var(--emerald-100);
+  color: var(--emerald-800);
+  border: 1px solid var(--emerald-200);
+}
+
+/* Error keeps Red (Standard UX convention) 
+   If you want this green too, let me know, but it is not recommended. */
+.add-medicine-container .message.error {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}

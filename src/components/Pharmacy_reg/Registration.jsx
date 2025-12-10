@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Camera, MapPin, User, Mail, Phone, Clock, Home, Loader2 } from 'lucide-react';
+import { Camera, MapPin, User, Mail, Phone, Clock, Home, Loader2, Lock } from 'lucide-react';
 import './Registration.css'; // This imports the CSS file
-import toast ,{Toaster} from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { createClient } from '@supabase/supabase-js';
 
@@ -10,15 +10,16 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 export default function Registration() {
-     
+
   const [loading, setLoading] = useState(false);
   const [locating, setLocating] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(null);
-  
+
   const [formData, setFormData] = useState({
     pharmacyName: '',
     ownerName: '',
     email: '',
+    password: '',
     phoneNumber: '',
     address: '',
     openingHours: '',
@@ -83,71 +84,72 @@ export default function Registration() {
     }, 1500);
   };*/
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!formData.latitude || !formData.longitude) {
-    toast.error("Please get your current location first!");
-    return;
-  }
+    if (!formData.latitude || !formData.longitude) {
+      toast.error("Please get your current location first!");
+      return;
+    }
 
-  setLoading(true);
+    setLoading(true);
 
-  
 
-  try {
-    let imageUrl = "";
-    if(formData.profilePicture){
-      const file = formData.profilePicture;
-      const fileName = `${Date.now()}_${file.name}`;
 
-      const{data,error} = await supabase.storage
-        .from('pharmacy-img')
-        .upload(fileName, file);
+    try {
+      let imageUrl = "";
+      if (formData.profilePicture) {
+        const file = formData.profilePicture;
+        const fileName = `${Date.now()}_${file.name}`;
 
-        if(error){
+        const { data, error } = await supabase.storage
+          .from('pharmacy-img')
+          .upload(fileName, file);
+
+        if (error) {
           console.log(error);
           toast.error("Image upload failed");
           setLoading(false);
           return;
         }
-        
-        const {data :urlData} = supabase.storage
+
+        const { data: urlData } = supabase.storage
           .from('pharmacy-img')
           .getPublicUrl(fileName);
 
-          imageUrl = urlData.publicUrl;
+        imageUrl = urlData.publicUrl;
+      }
+
+      // 1. Create a standard JavaScript object (JSON payload)
+      const payload = {
+        pharmacyName: formData.pharmacyName,
+        ownerName: formData.ownerName,
+        email: formData.email,
+        password: formData.password,
+        phoneNumber: formData.phoneNumber,
+        address: formData.address,
+        openingHours: formData.openingHours,
+        latitude: formData.latitude,
+        longitude: formData.longitude,
+        profilePicture: imageUrl || null,
+        // Note: Standard JSON cannot send binary file objects (profilePicture) directly.
+        // If you need to send the image, the backend MUST support multipart/form-data.
+      };
+
+      // 2. Send as JSON (Axios handles the headers automatically)
+      const res = await axios.post(
+        "http://localhost:5000/api/pharmacy/register",
+        payload
+      );
+
+      toast.success(res.data.message);
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response?.data?.message || "Registration failed");
     }
 
-    // 1. Create a standard JavaScript object (JSON payload)
-    const payload = {
-      pharmacyName: formData.pharmacyName,
-      ownerName: formData.ownerName,
-      email: formData.email,
-      phoneNumber: formData.phoneNumber,
-      address: formData.address,
-      openingHours: formData.openingHours,
-      latitude: formData.latitude,
-      longitude: formData.longitude,
-      profilePicture: imageUrl || null,
-      // Note: Standard JSON cannot send binary file objects (profilePicture) directly.
-      // If you need to send the image, the backend MUST support multipart/form-data.
-    };
-
-    // 2. Send as JSON (Axios handles the headers automatically)
-    const res = await axios.post(
-      "http://localhost:5000/api/pharmacy/register",
-      payload
-    );
-
-    toast.success(res.data.message);
-
-  } catch (error) {
-    console.log(error);
-    toast.error(error.response?.data?.message || "Registration failed");
-  }
-
-  setLoading(false);
-};
+    setLoading(false);
+  };
 
   return (
     <div className="app-container">
@@ -157,25 +159,25 @@ export default function Registration() {
         <div className="sidebar-top-bar"></div>
         <div className="sidebar-content">
           <h1 className="welcome-title">Welcome Partner</h1>
-          
+
           <div className="info-card">
             <div className="icon-container">
               <div className="icon-glow"></div>
               <div className="icon-bg">
-                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="medical-svg">
-                   <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                   <path d="M12 5v14" className="svg-cross" />
-                   <path d="M5 12h14" className="svg-cross" />
-                 </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="medical-svg">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                  <path d="M12 5v14" className="svg-cross" />
+                  <path d="M5 12h14" className="svg-cross" />
+                </svg>
               </div>
             </div>
             <p className="info-text">
-              Join our network of healthcare providers. Manage your inventory, 
-              connect with patients, and grow your pharmacy business with our 
+              Join our network of healthcare providers. Manage your inventory,
+              connect with patients, and grow your pharmacy business with our
               comprehensive digital solutions.
             </p>
           </div>
-          
+
           <div className="footer-links">
             <span>Secure Platform</span>
             <span>•</span>
@@ -193,14 +195,14 @@ export default function Registration() {
           </div>
 
           <form onSubmit={handleSubmit} className="registration-form">
-            
+
             {/* Profile Picture Upload */}
             <div className="upload-container">
               <label className="upload-label">
-                <input 
-                  type="file" 
-                  accept="image/*" 
-                  className="hidden-input" 
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden-input"
                   onChange={handleFileChange}
                 />
                 {previewUrl ? (
@@ -212,7 +214,7 @@ export default function Registration() {
                   </div>
                 )}
                 <div className="upload-overlay">
-                   <span>Change</span>
+                  <span>Change</span>
                 </div>
               </label>
             </div>
@@ -274,7 +276,23 @@ export default function Registration() {
                 />
               </div>
             </div>
-
+            <div className="form-group">
+              <label className="form-label">Password</label>
+              <div className="input-wrapper">
+                <div className="input-icon-wrapper">
+                  <Lock size={18} />
+                </div>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  className="form-input"
+                  required
+                />
+              </div>
+            </div>
             {/* Phone Number */}
             <div className="form-group">
               <label className="form-label">Phone Number</label>
@@ -315,26 +333,26 @@ export default function Registration() {
                 <span className="badge">Required for Maps</span>
               </label>
               <div className="location-group">
-                 <div className="input-wrapper flex-grow">
-                    <div className="input-icon-wrapper">
-                      <MapPin size={18} />
-                    </div>
-                    <input
-                      type="text"
-                      value={formData.latitude && formData.longitude ? `${formData.latitude.toFixed(4)}, ${formData.longitude.toFixed(4)}` : ''}
-                      placeholder="Coordinates"
-                      disabled
-                      className="form-input disabled-input"
-                    />
-                 </div>
-                 <button 
-                   type="button"
-                   onClick={handleGetLocation}
-                   className="location-btn"
-                   title="Get Current Location"
-                 >
-                   {locating ? <Loader2 className="spinner" /> : <MapPin className="icon-sm" />}
-                 </button>
+                <div className="input-wrapper flex-grow">
+                  <div className="input-icon-wrapper">
+                    <MapPin size={18} />
+                  </div>
+                  <input
+                    type="text"
+                    value={formData.latitude && formData.longitude ? `${formData.latitude.toFixed(4)}, ${formData.longitude.toFixed(4)}` : ''}
+                    placeholder="Coordinates"
+                    disabled
+                    className="form-input disabled-input"
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={handleGetLocation}
+                  className="location-btn"
+                  title="Get Current Location"
+                >
+                  {locating ? <Loader2 className="spinner" /> : <MapPin className="icon-sm" />}
+                </button>
               </div>
               <p className="helper-text">*Click the button to fetch current location for the GeoJSON field.</p>
             </div>
