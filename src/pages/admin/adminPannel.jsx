@@ -12,6 +12,7 @@ import AdminAddMedicinePage from "./addMedicine";
 import AddMedicine from "./AddTestMed";
 import Products from "./Product";
 import Dashboard from "./dashbord";
+import OrderList from "./Orders";
 
 // --- INLINE SVG ICONS (Replaces react-icons) ---
 const Icons = {
@@ -26,6 +27,9 @@ const Icons = {
   ),
   Package: () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+  ),
+  Orders: () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
   )
 };
 
@@ -249,6 +253,12 @@ function Sidebar() {
           </Link>
         </li>
         <li className="menu-item">
+          <Link to="/admin/pannel/orders" className={`menu-link ${isActive("/admin/pannel/orders")}`}>
+            <span className="menu-icon"><Icons.Orders /></span>
+            Orders
+          </Link>
+        </li>
+        <li className="menu-item">
           <Link to="/admin/pannel/add-product" className={`menu-link ${isActive("/admin/pannel/add-product")}`}>
             <span className="menu-icon"><Icons.Plus /></span>
             Add Product
@@ -274,7 +284,8 @@ export default function AdminPanel() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="add-product" element={<AddMedicine />} />
             <Route path="products" element={<Products />} />
-          
+            <Route path="orders" element={<OrderList />} />
+
           </Routes>
         </div>
       </main>

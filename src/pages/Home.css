@@ -1,117 +1,359 @@
-/* 🌿 Global Styles */
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #f0fdf4;
-  margin: 0;
-  padding: 0;
-  color: #064e3b;
-  /* Ensure body takes full width */
-  height: 100vh;
-  overflow: hidden;
+/* ======================
+   RESET & SAFETY
+====================== */
+* {
+  box-sizing: border-box;
 }
 
+body {
+  padding: 24px;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  /* Lighter, fresher background */
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #1f2937;
+}
+
+/* ======================
+   MAIN CONTAINER
+====================== */
 .container {
-  width: 100%;
-  max-width: 1000px; /* Slightly reduced max-width for better focus */
-  margin: 0 auto; /* This centers the container horizontally */
-  padding: 40px 20px;
-  height: 100%;
-  overflow-y: auto;
-  /* FORCE CENTER ALIGNMENT */
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
 }
 
-/* 🌿 Title */
-h1 {
+/* ======================
+   TITLE
+====================== */
+.container h1 {
   text-align: center;
-  color: #065f46;
-  margin-bottom: 30px;
-  font-size: 32px;
+  margin-bottom: 32px;
+  color: #064e3b;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+/* ======================
+   MAP
+====================== */
+.leaflet-container {
+  width: 100%;
+  height: 450px;
+  border-radius: 24px;
+  margin-bottom: 40px;
+  box-shadow: 0 20px 40px -10px rgba(6, 78, 59, 0.15);
+  /* Soft deep shadow */
+  border: 4px solid white;
+}
+
+/* Popup Button */
+.btn-order-popup {
+  margin-top: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #10b981;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
   width: 100%;
 }
 
-/* 🌿 Search Box */
-.search-box {
-  width: 100%; /* Fill container width */
-  max-width: 800px; /* Prevent it from getting too wide on huge screens */
-  display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
-  justify-content: center;
-}
-
-.search-box input {
-  flex: 1; /* Takes available space */
-  padding: 14px;
-  border: 2px solid #10b981;
-  border-radius: 12px;
-  font-size: 16px;
-  background: white; /* Force white background */
-  color: #333;
-}
-
-.search-box button {
-  width: 150px;
-  background: #10b981;
-  border: none;
-  padding: 14px;
-  border-radius: 12px;
-  font-size: 16px;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.search-box button:hover {
+.btn-order-popup:hover {
   background: #059669;
 }
 
-/* 🌿 Map */
-.leaflet-container {
-  width: 100% !important; /* Force map to fill container */
-  height: 450px;
-  border-radius: 15px;
-  margin-bottom: 25px;
-  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
-  z-index: 1; /* Ensure it stays below headers if any */
+/* ======================
+   MAP TOOLTIPS
+====================== */
+.leaflet-tooltip.user-tooltip {
+  background: #3B82F6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
 }
 
-/* 🌿 Pharmacy Cards List Container */
-/* Add a wrapper div in your JSX for the list if you haven't, 
-   but this targets the divs directly if they are loose */
-div[style="margin-top: 20px;"] {
-    width: 100%;
+.leaflet-tooltip.user-tooltip::before {
+  border-top-color: #3B82F6;
 }
 
-.pharmacy-card {
+.leaflet-tooltip.pharmacy-tooltip {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.leaflet-tooltip.pharmacy-tooltip::before {
+  border-top-color: #10b981;
+}
+
+/* ======================
+   RESULTS SECTION
+====================== */
+.pharmacy-results {
   width: 100%;
-  box-sizing: border-box; /* Ensures padding doesn't break width */
-  background: #d8f3dc;
-  padding: 18px 22px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-  border-left: 6px solid #10b981;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  overflow: visible;
+  /* Allow shadows to show */
 }
 
-.pharmacy-card h3 {
+/* The Horizontal Scroll Container */
+.pharmacy-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 20px 10px 40px 10px;
+  /* Padding for shadows */
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar but keep functionality */
+.pharmacy-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.pharmacy-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pharmacy-grid::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+/* ======================
+   MODERN HORIZONTAL CARD
+====================== */
+.pharmacy-card {
+  flex: 0 0 320px;
+  /* Fixed width cards */
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  scroll-snap-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pharmacy-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 30px -10px rgba(16, 185, 129, 0.2);
+  border-color: #a7f3d0;
+}
+
+/* Gradient Top Border */
+.pharmacy-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #34d399, #10b981);
+  border-radius: 24px 24px 0 0;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  margin-top: 8px;
+}
+
+.card-header h3 {
   margin: 0;
-  color: #065f46;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.4;
 }
 
-/* 🌿 Responsive Design */
+.status-badge {
+  background: #ecfdf5;
+  color: #059669;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.card-body p {
+  margin: 8px 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-order {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-order:hover {
+  background: #059669;
+}
+
+/* ======================
+   MODAL & FORM
+   (Kept clean and consistent)
+====================== */
+.order-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  /* Nice blur effect */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.order-modal-content {
+  width: 100%;
+  max-width: 450px;
+  background: white;
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-form-group {
+  margin-bottom: 20px;
+}
+
+.modal-form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.modal-form-group input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  transition: all 0.2s;
+}
+
+.modal-form-group input:focus {
+  background: white;
+  border-color: #10b981;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.btn-cancel {
+  flex: 1;
+  padding: 12px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  color: #6b7280;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background: #f3f4f6;
+}
+
+.btn-submit {
+  flex: 1;
+  padding: 12px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background: #059669;
+}
+
+.order-success-message {
+  text-align: center;
+  color: #059669;
+  font-weight: 600;
+  background: #d1fae5;
+  padding: 16px;
+  border-radius: 12px;
+}
+
 @media (max-width: 768px) {
   .leaflet-container {
     height: 350px;
   }
-  
-  .search-box {
-    flex-direction: column;
+
+  .pharmacy-grid {
+    gap: 16px;
+    padding: 10px 16px 30px 16px;
   }
-  
-  .search-box button {
-    width: 100%;
+
+  .pharmacy-card {
+    flex: 0 0 280px;
   }
+
+  /* Slightly smaller cards on mobile */
 }
