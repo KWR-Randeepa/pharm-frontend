@@ -7,6 +7,8 @@ const OrderList = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [confirming, setConfirming] = useState(null);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const [selectedOrder, setSelectedOrder] = useState(null);
 
     const getToken = () => {
         const rawData = localStorage.getItem('userToken');
@@ -44,9 +46,15 @@ const OrderList = () => {
         }
     };
 
-    const handleConfirmOrder = async (orderId) => {
-        if (!window.confirm("Are you sure you want to confirm this order? An email will be sent to the customer.")) return;
+    const initiateConfirm = (order) => {
+        setSelectedOrder(order);
+        setShowConfirmModal(true);
+    };
 
+    const handleConfirmOrder = async () => {
+        if (!selectedOrder) return;
+
+        const orderId = selectedOrder._id;
         setConfirming(orderId);
         try {
             const token = getToken();
@@ -56,12 +64,13 @@ const OrderList = () => {
 
             // Refresh list
             fetchOrders();
-            alert("Order confirmed successfully!");
-
+            // alert("Order confirmed successfully!"); // Removed alert for cleaner UX
         } catch (err) {
             alert(err.response?.data?.message || 'Confirmation failed');
         }
         setConfirming(null);
+        setShowConfirmModal(false);
+        setSelectedOrder(null);
     };
 
     useEffect(() => {
@@ -124,7 +133,7 @@ const OrderList = () => {
                                             <button
                                                 className="btn-delete" // Use same class for styling
                                                 style={{ backgroundColor: '#059669' }}
-                                                onClick={() => handleConfirmOrder(order._id)}
+                                                onClick={() => initiateConfirm(order)}
                                                 disabled={confirming === order._id}
                                             >
                                                 {confirming === order._id ? 'Processing...' : 'Confirm'}
@@ -135,6 +144,35 @@ const OrderList = () => {
                             ))}
                         </tbody>
                     </table>
+                </div>
+            )}
+            {/* Confirmation Modal */}
+            {showConfirmModal && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h3>Confirm Order</h3>
+                        </div>
+                        <div className="modal-body">
+                            <p>Are you sure you want to confirm this order?</p>
+                            <p className="modal-subtext">This will send a confirmation email to <strong>{selectedOrder?.userEmail}</strong>.</p>
+                        </div>
+                        <div className="modal-actions">
+                            <button
+                                className="btn-cancel-modal"
+                                onClick={() => setShowConfirmModal(false)}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                className="btn-confirm-modal"
+                                onClick={handleConfirmOrder}
+                                disabled={confirming === selectedOrder?._id}
+                            >
+                                {confirming === selectedOrder?._id ? 'Processing...' : 'Yes, Confirm Order'}
+                            </button>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>

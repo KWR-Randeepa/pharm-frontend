@@ -40,6 +40,11 @@ function Home() {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [usingFallback, setUsingFallback] = useState(false);
+
+  // Colombo (Lotus Tower) Coordinates as Fallback
+  const FALLBACK_LAT = 6.9271;
+  const FALLBACK_LONG = 79.8612;
 
   // Order Modal State
   const [showModal, setShowModal] = useState(false);
@@ -99,9 +104,45 @@ function Home() {
           });
           console.log("Drug Search Res:", res.data); // LOGGING
           if (res.data.message) {
-            setError(res.data.message + (res.data.suggestion ? ` ${res.data.suggestion}` : ''));
+            // 1. Check if we are already at Fallback Location (to prevent infinite loops)
+            const isAtFallback = Math.abs(location.lat - FALLBACK_LAT) < 0.001 && Math.abs(location.long - FALLBACK_LONG) < 0.001;
+
+            if (!isAtFallback) {
+              console.log("Not found nearby, trying Fallback (Colombo)...");
+              // 2. Perform Fallback Search
+              try {
+                const fallbackRes = await axios.get(`http://localhost:5000/api/search`, {
+                  params: {
+                    drugName: drugName,
+                    lat: FALLBACK_LAT,
+                    long: FALLBACK_LONG
+                  }
+                });
+
+                if (fallbackRes.data.message) {
+                  // Still not found
+                  setError(res.data.message + (res.data.suggestion ? ` ${res.data.suggestion}` : ''));
+                  setUsingFallback(false);
+                } else {
+                  // Found in Fallback
+                  setPharmacies(fallbackRes.data);
+                  setLocation({ lat: FALLBACK_LAT, long: FALLBACK_LONG });
+                  setUsingFallback(true);
+                }
+              } catch (fallbackErr) {
+                setError("Error connecting to server during fallback.");
+              }
+            } else {
+              // Already at Fallback, just show error
+              setError(res.data.message + (res.data.suggestion ? ` ${res.data.suggestion}` : ''));
+              setUsingFallback(true);
+            }
           } else {
             setPharmacies(res.data); // Structure: [{ pharmacy: {...}, status: ... }]
+
+            // Check if we effectively used Fallback (e.g. if location naturally matched)
+            const isAtFallback = Math.abs(location.lat - FALLBACK_LAT) < 0.001 && Math.abs(location.long - FALLBACK_LONG) < 0.001;
+            setUsingFallback(isAtFallback);
           }
         } else {
           // Search generic nearby pharmacies
@@ -171,6 +212,20 @@ function Home() {
 
       {error && <div style={{ color: 'red', marginBottom: '10px', textAlign: 'center' }}>{error}</div>}
 
+      {usingFallback && !error && (
+        <div style={{
+          backgroundColor: '#d1fae5',
+          color: '#065f46',
+          padding: '10px',
+          borderRadius: '8px',
+          marginBottom: '20px',
+          textAlign: 'center',
+          border: '1px solid #34d399'
+        }}>
+          <strong>Note:</strong> Medicine not found nearby. Showing results from <strong>Colombo</strong>.
+        </div>
+      )}
+
       {/* Map View */}
       {location && (
         <MapContainer center={[location.lat, location.long]} zoom={13} scrollWheelZoom={false} className="leaflet-container">
@@ -181,7 +236,7 @@ function Home() {
 
           {/* User Location Marker (Blue) */}
           <Marker position={[location.lat, location.long]} icon={UserIcon}>
-            <Popup>📍 Your Location</Popup>
+            <Popup>Your Location</Popup>
             <Tooltip permanent direction="top" offset={[0, -40]} className="user-tooltip">
               You
             </Tooltip>
@@ -230,6 +285,14 @@ function Home() {
             return (
               <div key={item.pharmacy._id} className="pharmacy-card">
                 <div className="card-header">
+                  {item.pharmacy.profilePicture && (
+                    <img
+                      src={`http://localhost:5000${item.pharmacy.profilePicture}`}
+                      alt={item.pharmacy.pharmacyName}
+                      className="pharmacy-card-image"
+                      onError={(e) => { e.target.style.display = 'none'; }}
+                    />
+                  )}
                   <h3>{item.pharmacy.pharmacyName || item.pharmacy.name || item.pharmacy.ownerName || "Unknown Pharmacy"}</h3>
                   <span className="status-badge">Open</span>
                 </div>

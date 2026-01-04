@@ -357,3 +357,12 @@ body {
 
   /* Slightly smaller cards on mobile */
 }
+
+/* Pharmacy Card Image */
+.pharmacy-card-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}

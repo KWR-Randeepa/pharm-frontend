@@ -11,29 +11,35 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.table-wrapper{
+.table-wrapper {
   max-height: 400px;
   overflow-y: auto;
   overflow-x: auto;
-  border: 1px solid #eef2f7; 
+  border: 1px solid #eef2f7;
   border-radius: 8px;
   margin-top: 10px;
 }
+
 .styled-table th {
-  position: sticky;        /* Make the header sticky */
-  top: 0;                  /* Stick it to the very top of the wrapper */
-  z-index: 10;             /* Ensure it floats above the table rows */
-  
+  position: sticky;
+  /* Make the header sticky */
+  top: 0;
+  /* Stick it to the very top of the wrapper */
+  z-index: 10;
+  /* Ensure it floats above the table rows */
+
   /* Visuals (Must have a background color or rows will scroll behind transparent text) */
-  background-color: #f8f9fa; 
+  background-color: #f8f9fa;
   color: #6c757d;
   padding: 16px 20px;
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.8rem;
   letter-spacing: 0.5px;
-  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1); /* Optional: small shadow under header */
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+  /* Optional: small shadow under header */
 }
+
 .inventory-header {
   display: flex;
   justify-content: space-between;
@@ -51,7 +57,8 @@
 
 /* Table Styling */
 .table-wrapper {
-  overflow-x: auto; /* Responsive wrapper */
+  overflow-x: auto;
+  /* Responsive wrapper */
 }
 
 .styled-table {
@@ -126,7 +133,9 @@
 }
 
 /* Loading and Empty States */
-.loading-state, .error-state, .empty-state {
+.loading-state,
+.error-state,
+.empty-state {
   text-align: center;
   padding: 40px;
   color: #6c757d;
@@ -137,7 +146,9 @@
   background-color: #fff5f5;
   border-radius: 8px;
 }
+
 /* ... existing styles ... */
+
 
 /* --- Modal Styles --- */
 .modal-overlay {
@@ -146,65 +157,131 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Sit on top of everything */
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-content {
   background: white;
-  padding: 30px;
-  border-radius: 12px;
+  padding: 32px;
+  border-radius: 20px;
   width: 90%;
-  max-width: 400px;
-  text-align: center;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  animation: popIn 0.3s ease;
+  max-width: 480px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transform-origin: center center;
+  animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
 }
 
-.modal-content h3 {
+.modal-header h3 {
   margin-top: 0;
-  color: #333;
+  margin-bottom: 12px;
+  color: #111827;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
 }
 
-.modal-content p {
-  color: #666;
-  margin-bottom: 25px;
+.modal-body {
+  margin-bottom: 32px;
+}
+
+.modal-body p {
+  color: #4b5563;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.modal-subtext {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 4px solid #059669;
 }
 
 .modal-actions {
   display: flex;
-  justify-content: center;
-  gap: 15px;
+  justify-content: flex-end;
+  gap: 12px;
 }
 
-.btn-cancel {
-  background-color: #e2e6ea;
-  color: #495057;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
+.btn-cancel-modal {
+  padding: 12px 24px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  color: #374151;
+  font-size: 1rem;
   font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-.btn-confirm {
-  background-color: #dc3545;
+.btn-cancel-modal:hover {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+  color: #111827;
+}
+
+.btn-confirm-modal {
+  padding: 12px 24px;
+  background-color: #059669;
+  border: 1px solid transparent;
+  border-radius: 12px;
   color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
+  font-size: 1rem;
   font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.2s;
 }
 
-.btn-cancel:hover { background-color: #dbe2e8; }
-.btn-confirm:hover { background-color: #c82333; }
+.btn-confirm-modal:hover {
+  background-color: #047857;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
 
-/* Small animation to make it look smooth */
-@keyframes popIn {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+.btn-confirm-modal:active {
+  transform: translateY(0);
+}
+
+.btn-confirm-modal:disabled {
+  background-color: #10b981;
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
