@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 // Importing icons
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
@@ -7,12 +7,12 @@ const Footer = () => {
   return (
     <footer className="footer-section">
       <div className="footer-container">
-        
+
         {/* Column 1: Brand & Description */}
         <div className="footer-col brand-col">
           <h2 className="footer-logo">MediFind</h2>
           <p className="footer-text">
-            Connecting you with the nearest pharmacies and essential medicines instantly. 
+            Connecting you with the nearest pharmacies and essential medicines instantly.
             Bridging the gap between patients and healthcare providers.
           </p>
           <div className="social-links">
@@ -27,10 +27,9 @@ const Footer = () => {
         <div className="footer-col">
           <h3 className="footer-title">Quick Links</h3>
           <ul className="footer-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#search">Find Medicine</a></li>
-            <li><a href="#pharmacies">Registered Pharmacies</a></li>
-            <li><a href="#about">About Us</a></li>
+            <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link to="/terms-of-use">Terms of Use</Link></li>
+
           </ul>
         </div>
 
