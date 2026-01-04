@@ -85,6 +85,22 @@ html, body {
   margin-bottom: 2.5rem;
   color: #ffffff;
   line-height: 1.2;
+  
+  /* Animation Properties */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===== SEARCH BAR ===== */
@@ -95,7 +111,7 @@ html, body {
   width: 600px;
   max-width: 100%;
   background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   padding: 12px 20px;
   border-radius: 50px;
@@ -115,7 +131,7 @@ html, body {
 }
 
 .search-input::placeholder {
-  color: #333; /* Darkened slightly for visibility on blur */
+  color: #a19d9d; /* Darkened slightly for visibility on blur */
 }
 
 /* ===== SEARCH BUTTON ===== */

@@ -48,7 +48,7 @@ const Footer = () => {
             </li>
             <li>
               <FaEnvelope className="contact-icon" />
-              <span>support@medifind.com</span>
+              <span>medifind247@gmail.com</span>
             </li>
           </ul>
         </div>

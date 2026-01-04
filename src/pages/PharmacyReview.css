@@ -1,0 +1,160 @@
+/* Scoped variables and base settings */
+.phi-review-root {
+  --phi-primary: #1DBC60;
+  --phi-bg: #f7fefe;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color: #213547;
+  width: 100%;
+}
+
+/* Layout Container */
+.phi-review-root .review-layout {
+  display: flex;
+  justify-content: space-between; 
+  align-items: flex-start;
+  gap: 100px;
+  padding: 30px;
+  flex-wrap: nowrap;
+  border: 3px solid var(--phi-primary);
+  border-radius: 20px;
+  box-sizing: border-box;
+  background: #f3fffe;
+  margin: 20px 0;
+}
+
+/* Carousel Section */
+.phi-review-root .carousel-container {
+  flex: 1 1 650px;
+  max-width: 700px;
+  text-align: center;
+  border-right: 2px solid var(--phi-primary);
+  padding-right: 150px;
+  box-sizing: border-box;
+}
+
+.phi-review-root .carousel-track {
+  position: relative;
+  height: 350px;
+  width: 100%;
+}
+
+/* Scoped Card Styles */
+.phi-review-root .phi-card {
+  position: absolute;
+  width: 100%;
+  padding: 25px;
+  background: #e5fffc;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  opacity: 0;
+  transition: 0.5s ease, transform 0.5s ease;
+  backface-visibility: hidden;
+  box-sizing: border-box;
+}
+
+.phi-review-root .phi-card.phi-active {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  z-index: 2;
+}
+
+.phi-review-root .phi-card.phi-prev {
+  transform: translateX(-70px) scale(0.85);
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.phi-review-root .phi-card.phi-next {
+  transform: translateX(70px) scale(0.85);
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.phi-review-root .phi-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--phi-primary);
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+.phi-review-root .phi-stars {
+  color: gold;
+  margin: 5px 0;
+  font-size: 1.2rem;
+}
+
+/* Form Section */
+.phi-review-root .review-form {
+  flex: 1 1 400px;
+  max-width: 450px;
+  background: #f3fffe;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.phi-review-root .review-form input,
+.phi-review-root .review-form textarea,
+.phi-review-root .review-form select {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+.phi-review-root .review-form button {
+  width: 100%;
+  background: var(--phi-primary);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background 0.3s;
+}
+
+.phi-review-root .review-form button:hover {
+  filter: brightness(0.9);
+}
+
+/* Responsive Logic */
+@media (max-width: 1024px) {
+    .phi-review-root .carousel-container {
+        padding-right: 20px;
+        border-right: none;
+    }
+    .phi-review-root .review-layout {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+  .phi-review-root .review-layout {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .phi-review-root .carousel-container {
+    padding-right: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .phi-review-root .review-form {
+    max-width: 100%;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .phi-review-root .carousel-track {
+    height: 300px;
+  }
+}

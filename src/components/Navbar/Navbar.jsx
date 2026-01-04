@@ -23,13 +23,6 @@ const Navbar = () => {
           <span></span>
         </div>
 
-        {/* NAV LINKS */}
-        <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
-          <li><a href="/">Home</a></li>
-          <li><a href="/medicines">Medicines</a></li>
-          <li><a href="/categories">Categories</a></li>
-          <li><a href="/about">About Us</a></li>
-        </ul>
 
         {/* AUTH BUTTONS */}
         <div className={`auth-buttons ${menuOpen ? 'active' : ''}`}>

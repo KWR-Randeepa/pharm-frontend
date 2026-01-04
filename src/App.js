@@ -12,8 +12,13 @@ import AdminPannel from './pages/admin/adminPannel';
 import Registration from './components/Pharmacy_reg/Registration';
 import RegisterSection from './pages/RegisterSection';
 import Recommondation from './pages/Recommondation';
+import PharmacyReview from './pages/PharmacyReview';
 import Stats from './pages/Stats';
 import Footer from './pages/Footer';
+import HealthNews from './components/HealthNews/HealthNews';
+import InteractionChecker from './components/InteractionChecker/InteractionChecker';
+import MediTools from './components/MediTools/MediTools';
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
@@ -38,7 +43,7 @@ function AppContent() {
     <div className="App">
       {!isAdminRoute && <Navbar />}
       <Routes>
-        <Route path="/" element={<><HeroSection /><RegisterSection /><Stats/><Recommondation/><Footer/></>} />
+        <Route path="/" element={<><HeroSection /><RegisterSection /><Stats/><HealthNews/><InteractionChecker/><MediTools/><PharmacyReview/><Footer/></>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/terms-of-use" element={<TermsOfUse />} />

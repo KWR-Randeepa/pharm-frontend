@@ -27,7 +27,7 @@ const HeroSection = () => {
 
   return (
     <section className="hero-container">
-      <h1 className="hero-title">Healthy Tablets and Medicine</h1>
+      <h1 className="hero-title">Find Your Medicine Instantly</h1>
 
       <form className="search-wrapper" onSubmit={handleSearch}>
         <div className="search-bar">
@@ -38,7 +38,7 @@ const HeroSection = () => {
             className="search-input"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder={`Search for medicine...`}
+            placeholder={`Enter Medicine Name eg:panadol...`}
             required
           />
 

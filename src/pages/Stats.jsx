@@ -62,21 +62,21 @@ const Stats = () => {
     {
       id: 1,
       label: "Pharmacies Registered",
-      number: 120,
+      number: 20,
       icon: <FaClinicMedical />, 
       suffix: "+"
     },
     {
       id: 2,
       label: "Active Locations",
-      number: 45,
+      number: 10,
       icon: <FaMapMarkedAlt />, 
       suffix: ""
     },
     {
       id: 3,
       label: "Site Visits",
-      number: 2500,
+      number: 500,
       icon: <FaChartLine />, 
       suffix: "+"
     }

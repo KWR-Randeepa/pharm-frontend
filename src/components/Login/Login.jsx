@@ -1,117 +1,165 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import './Login.css';
 
+const clientId =
+  "1021227931270-50trr6ij37m65fkt624gr58m7usn5p3r.apps.googleusercontent.com";
 
 function Login() {
-    const navigate = useNavigate(); // Hook for redirection
-    
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  // Handle input change
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
+    if (error) setError('');
+  };
 
-    const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+  // Normal login (UNCHANGED backend flow)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
 
-    const handleChange = (e) => {
-        setFormData({ 
-            ...formData, 
-            [e.target.name]: e.target.value 
-        });
-        // Clear error when user types
-        if (error) setError('');
-    };
+    try {
+      const res = await axios.post(
+        'http://localhost:5000/api/pharmacy/login',
+        formData
+      );
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError('');
+      localStorage.setItem('userToken', res.data.token);
+      navigate('/admin/pannel');
 
-        try {
-            // 1. Send Login Request
-            const res = await axios.post('http://localhost:5000/api/pharmacy/login', formData);
+    } catch (err) {
+      const errorMsg =
+        err.response?.data?.message ||
+        'Login failed. Please check your credentials.';
+      setError(errorMsg);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            // 2. Save the Token
-            localStorage.setItem('userToken', res.data.token);
-            
-            // 3. Redirect to Admin Panel
-            // Make sure you have a route defined for '/admin' in your App.js
-            navigate('/admin/pannel'); 
+  // Google login success
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      setLoading(true);
 
-        } catch (err) {
-            const errorMsg = err.response?.data?.message || 'Login failed. Please check your credentials.';
-            setError(errorMsg);
-        } finally {
-            setLoading(false);
+      // Send Google token to backend
+      const res = await axios.post(
+        'http://localhost:5000/api/pharmacy/google-login',
+        {
+          token: credentialResponse.credential,
         }
-    };
+      );
 
-    return (
-        <div className="login-container">
-            <form onSubmit={handleSubmit}>
-                <h1>Log In</h1>
+      localStorage.setItem('userToken', res.data.token);
+      navigate('/admin/pannel');
 
-                {/* Error Message Display */}
-                {error && (
-                    <div style={{ color: 'red', marginBottom: '15px', textAlign: 'center' }}>
-                        {error}
-                    </div>
-                )}
+    } catch (err) {
+      setError('Google login failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-                <div className="input-group">
-                    <input
-                        type="email"
-                        name="email"
-                        className="input-field"
-                        placeholder="Email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+  // Google login error
+  const handleGoogleError = () => {
+    setError('Google authentication failed');
+  };
 
-                <div className="input-group">
-                    <div className="password-wrapper">
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            name="password"
-                            className="input-field"
-                            placeholder="Password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            required
-                        />
-                        <button
-                            type="button"
-                            className="toggle-password"
-                            onClick={() => setShowPassword(!showPassword)}
-                        >
-                            {showPassword ? "HIDE" : "SHOW"}
-                        </button>
-                    </div>
-                </div>
+  return (
+    <GoogleOAuthProvider clientId={clientId}>
+      <div className="login-container">
+        <form onSubmit={handleSubmit}>
+          <h1>Log In</h1>
 
-                <div className="options-row">
-                    <a href="#forgot-password">Forgot Password?</a>
-                    <label className="remember-me">
-                        <input type="checkbox" />
-                        Remember me
-                    </label>
-                </div>
+          {/* Error */}
+          {error && (
+            <div style={{ color: 'red', marginBottom: '15px', textAlign: 'center' }}>
+              {error}
+            </div>
+          )}
 
-                <button type="submit" className="login-button" disabled={loading}>
-                    {loading ? 'Logging in...' : 'Log In'}
-                </button>
+          {/* Email */}
+          <div className="input-group">
+            <input
+              type="email"
+              name="email"
+              className="input-field"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-                <div className="login-link">
-                    Don't have an account? <a href="/pharmacy-registration">Sign Up</a>
-                </div>
-            </form>
-        </div>
-    );
+          {/* Password */}
+          <div className="input-group">
+            <div className="password-wrapper">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                name="password"
+                className="input-field"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <button
+                type="button"
+                className="toggle-password"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? 'HIDE' : 'SHOW'}
+              </button>
+            </div>
+          </div>
+
+          {/* Options */}
+          <div className="options-row">
+            <a href="#forgot-password">Forgot Password?</a>
+            <label className="remember-me">
+              <input type="checkbox" />
+              Remember me
+            </label>
+          </div>
+
+          {/* Login Button */}
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? 'Logging in...' : 'Log In'}
+          </button>
+
+          {/* Sign Up */}
+          <div className="login-link">
+            Don't have an account? <a href="/pharmacy-registration">Sign Up</a>
+          </div>
+
+          {/* Google Login */}
+          <div style={{ marginTop: '20px', textAlign: 'center' }}>
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              useOneTap
+            />
+          </div>
+        </form>
+      </div>
+    </GoogleOAuthProvider>
+  );
 }
 
 export default Login;
