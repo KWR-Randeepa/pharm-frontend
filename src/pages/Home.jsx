@@ -133,12 +133,12 @@ function Home() {
                 setError("Error connecting to server during fallback.");
               }
             } else {
-              // Already at Fallback, just show error
+              
               setError(res.data.message + (res.data.suggestion ? ` ${res.data.suggestion}` : ''));
               setUsingFallback(true);
             }
           } else {
-            setPharmacies(res.data); // Structure: [{ pharmacy: {...}, status: ... }]
+            setPharmacies(res.data); 
 
             // Check if we effectively used Fallback (e.g. if location naturally matched)
             const isAtFallback = Math.abs(location.lat - FALLBACK_LAT) < 0.001 && Math.abs(location.long - FALLBACK_LONG) < 0.001;

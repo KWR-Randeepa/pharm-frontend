@@ -1,6 +1,4 @@
-/* =======================================================
-   =============== GLOBAL & SCROLL FIXES =================
-   ======================================================= */
+
 html, body {
   margin: 0;
   padding: 0;
@@ -10,9 +8,7 @@ html, body {
   overflow-y: auto;   /* ENABLE vertical scrolling */
 }
 
-/* =======================================================
-   =============== HERO CONTAINER =================
-   ======================================================= */
+
 .hero-container {
   display: flex;
   flex-direction: column;
@@ -22,8 +18,8 @@ html, body {
   width: 100%;
   
   /* --- CHANGED: Full Screen Height --- */
-  min-height: 100vh; /* Ensures it covers the full screen at minimum */
-  height: auto;      /* Allows it to grow larger if content needs it */
+  min-height: 100vh; 
+  height: auto;      
   
   position: relative;
   background-image: url('../../assets/bg.jpg');
@@ -31,7 +27,7 @@ html, body {
   background-position: center;
   background-repeat: no-repeat;
   color: #ffffff;
-  /* Removed 'overflow: hidden' here so content doesn't get cut off */
+ 
 }
 
 /* Gradient overlay */
@@ -48,7 +44,7 @@ html, body {
   z-index: 1;
 }
 
-/* Ensure content appears above overlay */
+
 .hero-container > * {
   position: relative;
   z-index: 2;
@@ -61,9 +57,7 @@ html, body {
   100% { background-position: 0% 0%; }
 }
 
-/* =======================================================
-   =============== COMPONENT STYLES =================
-   ======================================================= */
+
 
 /* ===== SEARCH WRAPPER ===== */
 .search-wrapper {
@@ -127,7 +121,7 @@ html, body {
   padding: 0.5rem;
   color: #16b620;
   text-align: center;
-  background: transparent; /* Added to ensure it blends */
+  background: transparent; 
 }
 
 .search-input::placeholder {
@@ -164,9 +158,7 @@ html, body {
   margin-top: 1rem;
 }
 
-/* =======================================================
-   =============== RESPONSIVE BREAKPOINTS =================
-   ======================================================= */
+
 
 /* ---------- Tablets (900px and below) ---------- */
 @media (max-width: 900px) {

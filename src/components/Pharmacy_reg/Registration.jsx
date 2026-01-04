@@ -131,8 +131,7 @@ export default function Registration() {
         latitude: formData.latitude,
         longitude: formData.longitude,
         profilePicture: imageUrl || null,
-        // Note: Standard JSON cannot send binary file objects (profilePicture) directly.
-        // If you need to send the image, the backend MUST support multipart/form-data.
+        
       };
 
       // 2. Send as JSON (Axios handles the headers automatically)

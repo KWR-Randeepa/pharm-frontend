@@ -308,7 +308,7 @@ body, html {
 
 .input-icon-wrapper {
   position: absolute;
-  left: 1.25rem; /* Adjusted left position for larger padding */
+  left: 1.25rem; 
   top: 50%;
   transform: translateY(-50%);
   color: var(--emerald-500);
@@ -324,7 +324,7 @@ body, html {
   /* Changed to pill shape */
   border-radius: 50px; 
   
-  /* Increased padding for bigger box */
+  
   padding: 1rem 1.5rem 1rem 3.5rem; 
   
   color: white;
@@ -332,13 +332,13 @@ body, html {
   font-size: 1rem;
   box-sizing: border-box;
 }
-/* --- UPDATED SECTION END --- */
+
 
 .form-textarea {
-  padding-left: 1.5rem; /* Adjust padding for textarea since it has no icon usually */
+  padding-left: 1.5rem;  
   resize: none;
   font-family: inherit;
-  border-radius: 1.5rem; /* Textareas look better with slightly less rounding than inputs */
+  border-radius: 1.5rem; 
 }
 
 .form-input::placeholder, .form-textarea::placeholder {
@@ -396,7 +396,7 @@ body, html {
   color: white;
   font-weight: 700;
   padding: 1rem;
-  /* Updated to match inputs */
+ 
   border-radius: 50px;
   box-shadow: 0 10px 15px -3px rgba(6, 78, 59, 0.5);
   border: none;

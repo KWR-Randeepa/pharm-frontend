@@ -41,11 +41,11 @@
   background: white;
   border-radius: 16px;
   
-  /* UPDATED: Wider card and less side padding to fit long text */
-  width: 320px; 
-  padding: 40px 15px; /* Reduced side padding from 30px to 15px */
   
-  display: flex; /* Flex layout to keep vertical alignment consistent */
+  width: 320px; 
+  padding: 40px 15px;
+  
+  display: flex; 
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -96,14 +96,14 @@
 }
 
 .stat-label {
-  /* UPDATED: Slightly smaller font to prevent awkward wrapping */
+
   font-size: 1rem; 
   font-weight: 600;
   color: var(--text-light);
   text-transform: uppercase;
-  letter-spacing: 0.5px; /* Reduced slightly to save space */
+  letter-spacing: 0.5px; 
   margin: 0;
-  width: 100%; /* Ensure text uses full width of the container */
+  width: 100%; 
   line-height: 1.4;
 }
 

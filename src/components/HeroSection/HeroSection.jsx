@@ -1,21 +1,16 @@
-import React, { useState } from 'react'; // Removed useEffect, useRef
+import React, { useState } from 'react'; 
 import { useNavigate } from 'react-router-dom';
 import './HeroSection.css';
-// import Button from '../Button/Button'; // Removed if not used
+
 import SearchIcon from '../../assets/search.svg';
 
 const HeroSection = () => {
-  // Removed categoryOpen, selectedCategory, dropdownRef states/variables
+
   const [query, setQuery] = useState('');
   
   const navigate = useNavigate();
 
-  // Removed categories array
-
-  // Removed useEffect (for handleClickOutside)
-  // Removed handleSelectCategory
-
-  // Updated handleSearch logic (simplified as category is always 'Medicine')
+  
   const handleSearch = (e) => {
     e.preventDefault();
     
@@ -48,8 +43,7 @@ const HeroSection = () => {
         </div>
       </form>
 
-      {/* Action Buttons removed as they were not in the snippet and might be unused */}
-      {/* If you need them back, let me know! */}
+     
       
     </section>
   );

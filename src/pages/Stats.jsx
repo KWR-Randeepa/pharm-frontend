@@ -14,10 +14,10 @@ const Counter = ({ target, duration }) => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          observer.disconnect(); // Run animation only once
+          observer.disconnect(); 
         }
       },
-      { threshold: 0.5 } // Trigger when 50% of the item is visible
+      { threshold: 0.5 }
     );
 
     if (countRef.current) {
