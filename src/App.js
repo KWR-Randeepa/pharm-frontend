@@ -11,7 +11,7 @@ import AdminAddMedicinePage from './pages/admin/addMedicine';
 import AdminPannel from './pages/admin/adminPannel';
 import Registration from './components/Pharmacy_reg/Registration';
 import RegisterSection from './pages/RegisterSection';
-import Recommondation from './pages/Recommondation';
+
 import PharmacyReview from './pages/PharmacyReview';
 import Stats from './pages/Stats';
 import Footer from './pages/Footer';
