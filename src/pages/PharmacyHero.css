@@ -1,0 +1,135 @@
+/* Container & Base Background */
+.ph-hero-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #d8f3dc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+/* --- Pill & Tablet Base Styles --- */
+.ph-medication-icon {
+    position: absolute;
+    width: 100px; 
+    height: 60px; 
+    background-color: white;
+    border-radius: 30px; 
+    opacity: 0;
+    animation: ph-drift 15s linear infinite;
+    z-index: 1; 
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+/* The green half of the pill */
+.ph-medication-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    background-color: #74C69D; 
+    border-radius: 0 30px 30px 0; 
+}
+
+.ph-tablet-icon {
+    position: absolute;
+    width: 60px; 
+    height: 60px; 
+    background-color: #40916C; 
+    border-radius: 50%;
+    opacity: 0;
+    animation: ph-drift 20s linear infinite reverse;
+    z-index: 1;
+    filter: drop-shadow(0 0 3px rgba(64, 145, 108, 0.8));
+}
+
+/* --- Drift Animation --- */
+@keyframes ph-drift {
+    0% { transform: translate(-10vw, -10vh) rotate(0deg); opacity: 0; }
+    5% { opacity: 0.6; }
+    50% { transform: translate(50vw, 50vh) rotate(180deg); opacity: 0.3; }
+    95% { opacity: 0.6; }
+    100% { transform: translate(110vw, 110vh) rotate(360deg); opacity: 0; }
+}
+
+/* --- Exact Positioning & Timing (Matched to your original) --- */
+.ph-med-1 { top: 10%; left: 5%; animation-duration: 18s; animation-delay: 1s; }
+.ph-med-2 { top: 50%; left: 20%; animation-duration: 14s; animation-delay: 5s; }
+.ph-med-3 { bottom: 5%; right: 15%; animation-duration: 22s; animation-delay: 10s; }
+.ph-med-4 { top: 30%; right: 5%; animation-duration: 16s; animation-delay: 3s; }
+.ph-med-5 { top: 80%; left: 60%; animation-duration: 15s; animation-delay: 8s; }
+.ph-med-6 { bottom: 10%; left: 30%; animation-duration: 20s; animation-delay: 12s; }
+
+.ph-tab-1 { top: 70%; left: 35%; animation-duration: 19s; animation-delay: 7s; }
+.ph-tab-2 { bottom: 20%; left: 5%; animation-duration: 13s; animation-delay: 2s; }
+.ph-tab-3 { top: 5%; right: 40%; animation-duration: 25s; animation-delay: 9s; }
+.ph-tab-4 { bottom: 40%; right: 70%; animation-duration: 17s; animation-delay: 4s; }
+.ph-tab-5 { top: 60%; right: 25%; animation-duration: 21s; animation-delay: 11s; }
+
+/* --- Hero Card & Blobs --- */
+.ph-card-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 580px;
+}
+
+.ph-hero-card {
+    background: rgba(255, 255, 255, 0.45); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 40px;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+}
+
+.ph-hero-title {
+    color: #1b4332;
+    font-size: 3.2rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.ph-highlight { color: #40916c; }
+
+.ph-hero-description {
+    color: #1b4332;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+
+.ph-register-btn {
+    background-color: #40916c;
+    color: white;
+    padding: 18px 45px;
+    border-radius: 35px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.ph-register-btn:hover {
+    background-color: #2d6a4f;
+    transform: scale(1.05);
+}
+
+/* Background Blobs */
+.ph-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    opacity: 0.6;
+}
+.ph-blob-1 { width: 400px; height: 400px; background: #95d5b2; top: -10%; left: -10%; }
+.ph-blob-2 { width: 500px; height: 500px; background: #74c69d; bottom: -10%; right: -10%; }

@@ -10,7 +10,7 @@ import Home from './pages/Home';
 import AdminAddMedicinePage from './pages/admin/addMedicine';
 import AdminPannel from './pages/admin/adminPannel';
 import Registration from './components/Pharmacy_reg/Registration';
-import RegisterSection from './pages/RegisterSection';
+import PharmacyHero from './pages/PharmacyHero';
 
 import PharmacyReview from './pages/PharmacyReview';
 import Stats from './pages/Stats';
@@ -43,7 +43,7 @@ function AppContent() {
     <div className="App">
       {!isAdminRoute && <Navbar />}
       <Routes>
-        <Route path="/" element={<><HeroSection /><RegisterSection /><Stats/><HealthNews/><InteractionChecker/><MediTools/><PharmacyReview/><Footer/></>} />
+        <Route path="/" element={<><HeroSection /><PharmacyHero/><Stats/><HealthNews/><InteractionChecker/><MediTools/><PharmacyReview/><Footer/></>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/terms-of-use" element={<TermsOfUse />} />
